@@ -14,6 +14,7 @@ type DatabaseConfig struct {
 	User               string
 	Password           string
 	Name               string
+	DbUrl              string
 	SSLMode            string
 	MaxOpenConns       int
 	MaxIdleConns       int
@@ -53,6 +54,7 @@ func Load() *AppConfig {
 			User:               getEnv("DB_USER", ""),
 			Password:           getEnv("DB_PASSWORD", ""),
 			Name:               getEnv("DB_NAME", ""),
+			DbUrl:              getEnv("DB_URL", ""),
 			SSLMode:            getEnv("DB_SSLMODE", "disable"),
 			MaxOpenConns:       getEnvInt("DB_MAX_OPEN_CONNS", 10),
 			MaxIdleConns:       getEnvInt("DB_MAX_IDLE_CONNS", 5),

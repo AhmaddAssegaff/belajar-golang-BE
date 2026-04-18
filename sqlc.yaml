@@ -1,0 +1,11 @@
+version: "2"
+
+sql:
+  - engine: "postgresql"
+    schema: "./migrations"
+    queries: "./internal/product/sql"
+    gen:
+      go:
+        package: "productdb"
+        out: "./internal/product/adapter/repository/sqlc"
+        sql_package: "database/sql"
