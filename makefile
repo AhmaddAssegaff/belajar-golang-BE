@@ -1,4 +1,7 @@
-.PHONY: dev test build run tidy swag
+.PHONY: dev test build run tidy swag migrate-up migrate-down migrate-create migrate-seed
+
+include .env
+export
 
 PKG ?= ./...
 ARGS ?=
@@ -20,3 +23,24 @@ tidy:
 
 swag:
 	swag init
+
+migrate-create:
+	migrate create -ext sql -dir ./migrations/ -seq $(name)
+
+migrate-up:
+	migrate -path ./migrations/ -database "$(DB_URL)" up
+
+migrate-up-one:
+	migrate -path ./migrations/ -database "$(DB_URL)" up 1
+
+migrate-down:
+	migrate -path ./migrations/ -database "$(DB_URL)" down 1
+
+migrate-down-all:
+	migrate -path ./migrations/ -database "$(DB_URL)" down
+
+migrate-force:
+	migrate -path ./migrations/ -database "$(DB_URL)" force $(version)
+
+migrate-version:
+	migrate -path ./migrations/ -database "$(DB_URL)" version
