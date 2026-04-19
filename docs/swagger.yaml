@@ -1,0 +1,43 @@
+definitions:
+  internal_product.Product:
+    properties:
+      description:
+        type: string
+      id:
+        type: string
+      imageURL:
+        type: string
+      name:
+        type: string
+      price:
+        format: int64
+        type: integer
+      stock:
+        type: integer
+    type: object
+info:
+  contact: {}
+paths:
+  /products:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/internal_product.Product'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get all products
+      tags:
+      - products
+swagger: "2.0"

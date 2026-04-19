@@ -22,7 +22,7 @@ tidy:
 	go mod tidy
 
 swag:
-	swag init
+	swag init -g cmd/main.go -o docs
 
 sqlc-gen:
 	sqlc generate

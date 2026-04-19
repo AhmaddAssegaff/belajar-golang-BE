@@ -4,12 +4,18 @@ import (
 	"log/slog"
 
 	"belajar-go-be/config"
+
+	_ "belajar-go-be/docs"
+
+	echoSwagger "github.com/swaggo/echo-swagger"
+
 	"belajar-go-be/internal/product"
 	productdb "belajar-go-be/internal/product/sqlc"
 	"database/sql"
 
-	"github.com/labstack/echo/v5"
-	"github.com/labstack/echo/v5/middleware"
+	echo "github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
+
 	_ "github.com/lib/pq"
 )
 
@@ -35,8 +41,10 @@ func main() {
 
 	e := echo.New()
 
-	e.Use(middleware.RequestLogger())
+	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+
+	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	e.GET("/products", handler.GetProducts)
 

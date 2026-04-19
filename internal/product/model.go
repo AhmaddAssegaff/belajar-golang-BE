@@ -1,5 +1,6 @@
 package product
 
+// Product response model
 type Product struct {
 	ID          string
 	Name        string
