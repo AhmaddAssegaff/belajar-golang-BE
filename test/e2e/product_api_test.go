@@ -5,6 +5,8 @@ import (
 	"testing"
 
 	cfg "belajar-go-be/test/e2e/config"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGetProducts(t *testing.T) {
@@ -12,12 +14,10 @@ func TestGetProducts(t *testing.T) {
 	defer cleanup()
 
 	resp, err := http.Get(cfg.BaseURL + "/products")
-	if err != nil {
-		t.Fatal(err)
-	}
+
+	assert.NoError(t, err)
+
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		t.Fatalf("expected 200, got %d", resp.StatusCode)
-	}
+	assert.Equalf(t, http.StatusOK, resp.StatusCode, "unexpected status code")
 }
