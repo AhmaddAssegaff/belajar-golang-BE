@@ -1,20 +1,11 @@
 package main
 
 import (
+	"database/sql"
 	"log/slog"
 
 	"belajar-go-be/config"
-
-	_ "belajar-go-be/docs"
-
-	echoSwagger "github.com/swaggo/echo-swagger"
-
-	"belajar-go-be/internal/product"
-	productdb "belajar-go-be/internal/product/sqlc"
-	"database/sql"
-
-	echo "github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	"belajar-go-be/internal/server"
 
 	_ "github.com/lib/pq"
 )
@@ -33,22 +24,9 @@ func main() {
 		return
 	}
 
-	queries := productdb.New(db)
+	app := server.New(db)
 
-	repo := product.NewRepository(queries)
-	service := product.NewService(repo)
-	handler := product.NewHandler(service)
-
-	e := echo.New()
-
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-
-	e.GET("/swagger/*", echoSwagger.WrapHandler)
-
-	e.GET("/products", handler.GetProducts)
-
-	if err := e.Start(cfg.AppHost); err != nil {
+	if err := app.Start(cfg.AppHost); err != nil {
 		slog.Error("failed to start server", "error", err)
 	}
 }

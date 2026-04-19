@@ -9,8 +9,11 @@ ARGS ?=
 dev:
 	go run ./cmd
 
-test:
+unit-test:
 	go test -v $(PKG) $(ARGS)
+
+e2e-test:
+	go test ./test/e2e -v $(if $(FILE),./test/e2e/$(FILE)) $(if $(RUN),-run $(RUN))
 
 build:
 	go build -o app ./cmd
