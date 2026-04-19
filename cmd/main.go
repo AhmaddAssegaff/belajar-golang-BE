@@ -4,6 +4,8 @@ import (
 	"log/slog"
 
 	"belajar-go-be/config"
+	"belajar-go-be/internal/product"
+	productdb "belajar-go-be/internal/product/sqlc"
 	"database/sql"
 
 	"github.com/labstack/echo/v5"
@@ -25,10 +27,18 @@ func main() {
 		return
 	}
 
+	queries := productdb.New(db)
+
+	repo := product.NewRepository(queries)
+	service := product.NewService(repo)
+	handler := product.NewHandler(service)
+
 	e := echo.New()
 
 	e.Use(middleware.RequestLogger())
 	e.Use(middleware.Recover())
+
+	e.GET("/products", handler.GetProducts)
 
 	if err := e.Start(cfg.AppHost); err != nil {
 		slog.Error("failed to start server", "error", err)

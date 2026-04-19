@@ -24,6 +24,9 @@ tidy:
 swag:
 	swag init
 
+sqlc-gen:
+	sqlc generate
+
 migrate-create:
 	migrate create -ext sql -dir ./migrations/ -seq $(name)
 
