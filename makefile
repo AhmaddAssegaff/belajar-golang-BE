@@ -3,14 +3,14 @@
 include .env
 export
 
-PKG ?= ./...
 ARGS ?=
+UNIT_PKG ?= ./internal/.../test/unit/...
 
 dev:
 	go run ./cmd
 
 unit-test:
-	go test -v $(PKG) $(ARGS)
+	go test -coverpkg=./internal/... -cover -v $(UNIT_PKG) $(ARGS)
 
 e2e-test:
 	go test ./test/e2e -v $(if $(FILE),./test/e2e/$(FILE)) $(if $(RUN),-run $(RUN))

@@ -1,16 +1,21 @@
 package product
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
 )
 
-type Handler struct {
-	service *Service
+type ServiceInterface interface {
+	GetAll(ctx context.Context) ([]Product, error)
 }
 
-func NewHandler(s *Service) *Handler {
+type Handler struct {
+	service ServiceInterface
+}
+
+func NewHandler(s ServiceInterface) *Handler {
 	return &Handler{service: s}
 }
 

@@ -1,15 +1,32 @@
 package product
 
-import "context"
+import (
+	"context"
+	"errors"
+)
 
-type Service struct {
-	repo *Repository
+type RepositoryInterface interface {
+	FindAll(ctx context.Context) ([]Product, error)
 }
 
-func NewService(r *Repository) *Service {
+type Service struct {
+	repo RepositoryInterface
+}
+
+func NewService(r RepositoryInterface) *Service {
 	return &Service{repo: r}
 }
 
 func (s *Service) GetAll(ctx context.Context) ([]Product, error) {
-	return s.repo.FindAll(ctx)
+	products, err := s.repo.FindAll(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if len(products) == 0 {
+		return nil, errors.New("no products found")
+	}
+
+	return products, nil
 }
