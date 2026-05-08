@@ -1,8 +1,13 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "Simple REST API built with Go, Echo, PostgreSQL, and sqlc",
+        "title": "Belajar Go Backend API",
+        "contact": {},
+        "version": "1.0"
     },
+    "host": "localhost:8080",
+    "basePath": "/",
     "paths": {
         "/products": {
             "get": {

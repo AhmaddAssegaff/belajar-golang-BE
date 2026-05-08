@@ -1,3 +1,9 @@
+// @title Belajar Go Backend API
+// @version 1.0
+// @description Simple REST API built with Go, Echo, PostgreSQL, and sqlc
+// @host localhost:8080
+// @BasePath /
+
 package main
 
 import (
