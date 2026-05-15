@@ -8,7 +8,7 @@ import (
 )
 
 type ServiceInterface interface {
-	GetAll(ctx context.Context) ([]Product, error)
+	GetAll(ctx context.Context) ([]ProductResponse, error)
 }
 
 type Handler struct {

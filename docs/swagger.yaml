@@ -1,17 +1,16 @@
 basePath: /
 definitions:
-  internal_product.Product:
+  product.ProductResponse:
     properties:
       description:
         type: string
       id:
         type: string
-      imageURL:
+      image_url:
         type: string
       name:
         type: string
       price:
-        format: int64
         type: integer
       stock:
         type: integer
@@ -34,7 +33,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/internal_product.Product'
+              $ref: '#/definitions/product.ProductResponse'
             type: array
         "500":
           description: Internal Server Error

@@ -33,7 +33,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/internal_product.Product"
+                                "$ref": "#/definitions/product.ProductResponse"
                             }
                         }
                     },
@@ -51,7 +51,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "internal_product.Product": {
+        "product.ProductResponse": {
             "type": "object",
             "properties": {
                 "description": {
@@ -60,15 +60,14 @@ const docTemplate = `{
                 "id": {
                     "type": "string"
                 },
-                "imageURL": {
+                "image_url": {
                     "type": "string"
                 },
                 "name": {
                     "type": "string"
                 },
                 "price": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "integer"
                 },
                 "stock": {
                     "type": "integer"

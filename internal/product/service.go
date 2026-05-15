@@ -6,7 +6,7 @@ import (
 )
 
 type RepositoryInterface interface {
-	FindAll(ctx context.Context) ([]Product, error)
+	FindAll(ctx context.Context) ([]ProductResponse, error)
 }
 
 type Service struct {
@@ -17,7 +17,7 @@ func NewService(r RepositoryInterface) *Service {
 	return &Service{repo: r}
 }
 
-func (s *Service) GetAll(ctx context.Context) ([]Product, error) {
+func (s *Service) GetAll(ctx context.Context) ([]ProductResponse, error) {
 	products, err := s.repo.FindAll(ctx)
 
 	if err != nil {
